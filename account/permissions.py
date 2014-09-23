@@ -2,12 +2,10 @@ from rest_framework import permissions
 
 class HasRolePermission(permissions.BasePermission):
 
-	def has_permission(self, request, view):	
-
+	def has_permission(self, request, view):		
 		if request.user.is_authenticated():	
-			return (self.required_role,) in request.user.roles.all().values_list("role_name")
-		else:
-			return False
+			return request.user.has_role(self.required_role)
+		return False
 
 class IsDirector(HasRolePermission):
     required_role = 'Director'
@@ -38,3 +36,14 @@ class IsSelf(permissions.BasePermission):
 
       	return False
 
+class IsSelfOrDirector(IsSelf):
+
+	def has_object_permission(self, request, view, obj):
+
+		if request.user.is_authenticated(): 
+			if request.user.has_role('Director'):
+				return True
+
+			return super(IsSelfOrDirector, self).has_object_permission(request, view, obj)
+
+		return False

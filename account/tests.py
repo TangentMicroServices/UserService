@@ -105,10 +105,6 @@ class EndpointAuthenticationTestCase(TestCase):
         
         assert response.status_code == 200, "User can see self"
 
-    def test_get_user_permission_denies(self):
-        pass
-
-        
 
 class EndpointsTestCase(TestCase):
 

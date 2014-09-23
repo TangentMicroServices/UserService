@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from rest_framework import routers, serializers, viewsets
 from rest_framework.authentication import TokenAuthentication
-from account.permissions import IsDirector, IsSelf, IsAdministrator
+from account.permissions import IsSelfOrDirector
 from account.models import Profile, AppAuthorization, Role
 from rest_framework.decorators import list_route, detail_route
 import json
@@ -41,7 +41,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     
-    permission_classes = (IsSelf, IsDirector,)
+    permission_classes = (IsSelfOrDirector,)
     
 
     @list_route(methods=['get', 'post'])
