@@ -1,4 +1,5 @@
 django==1.7
+gunicorn
 slumber
 requests
 responses
@@ -6,3 +7,4 @@ mock
 djangorestframework
 django-filter
 django-user-roles
+sphinx

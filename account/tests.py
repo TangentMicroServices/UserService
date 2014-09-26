@@ -7,6 +7,21 @@ from account.signals import new_user_created
 from account.models import Profile, Role
 from account.permissions import IsDirector, IsSelf
 from django.http import HttpRequest
+import json
+
+class TokenAuthTestCase(TestCase):
+
+    def setUp(self):
+        self.user = User.objects.create_user(username="joe", password="test")
+        self.c = Client()
+
+    def test_get_token(self):
+
+        response = self.c.post("/api-token-auth/", {"username" : "joe", "password": "test"})
+        
+        assert 200 == response.status_code, "Response is 200 OK"
+        assert json.loads(response.content).get("token", False) != False
+        
 
 class PermissionsTestCase(TestCase):
 
@@ -69,7 +84,7 @@ class ModelsTestCase(TestCase):
         user = User.objects.create_user(username="joe", password="test")
         token = Token.objects.get(user=user)
 
-        assert token.__class__.__name__ == 'Token', "Token is 40 characters long"
+        assert type(token) is Token, "Token is 40 characters long"
         assert Profile.objects.filter(user=user).count() == 1, "Exactly 1 matching profile is created"
 
     
