@@ -30,8 +30,10 @@
         "path_to_requirements" : "", 
         "path_to_managepy" : "",
         "djangoapp_httpport": 8003,
+        "djangoapp_static" : true,
         "djangoapp_domains" : "staging.userservice.tangentme.com",
         "djangoapp_pythonversion" : "2.7",
         "djangoapp_db_engine" : "postgresql_psycopg2",
         "djangoapp_db_host" : "127.0.0.1" }
+
 
