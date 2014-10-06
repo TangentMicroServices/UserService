@@ -5,6 +5,9 @@ requests
 responses
 mock
 djangorestframework
+django-rest-swagger
 django-filter
 django-user-roles
 sphinx
+django-jenkins
+django-extensions
