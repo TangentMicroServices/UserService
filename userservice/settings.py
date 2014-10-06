@@ -40,7 +40,12 @@ INSTALLED_APPS = (
     # 3rd party
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_swagger',
     'account',
+
+    # testing etc:
+    'django_jenkins',
+    'django_extensions',
 )
 
 MIDDLEWARE_CLASSES = (
