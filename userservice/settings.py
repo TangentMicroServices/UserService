@@ -48,6 +48,17 @@ INSTALLED_APPS = (
     'django_extensions',
 )
 
+PROJECT_APPS = (
+    'account',
+)
+
+JENKINS_TASKS = (
+    'django_jenkins.tasks.run_pylint',
+    'django_jenkins.tasks.with_coverage',
+    #'django_jenkins.tasks.run_sloccount',
+    #'django_jenkins.tasks.run_graphmodels'
+)
+
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
