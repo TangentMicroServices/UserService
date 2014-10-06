@@ -97,3 +97,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',        
     )
 }
+
+STATIC_ROOT = '/srv/www/userservice/static/'
