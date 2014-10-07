@@ -9,6 +9,15 @@ from account.permissions import IsDirector, IsSelf
 from django.http import HttpRequest
 import json
 
+"""
+class Pep8TestCase(TestCase):
+
+    def test_pep8(self):
+        from subprocess import call
+        result = call(['py.test', '--pep8'])
+        assert result == 0, "Code is pep8"
+"""
+
 class TokenAuthTestCase(TestCase):
 
     def setUp(self):
