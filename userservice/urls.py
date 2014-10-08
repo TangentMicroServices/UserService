@@ -11,12 +11,14 @@ import json
 
 
 class ProfileSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Profile
         exclude = ('user', 'id',)
 
 
 class AppAuthorizationSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = AppAuthorization
         exclude = ('user',)
@@ -85,11 +87,12 @@ router.register(r'users', UserViewSet)
 
 
 urlpatterns = patterns('',
-    url(r'^', include(router.urls)),
-    url(r'^api-token-auth/', 'rest_framework.authtoken.views.obtain_auth_token')
+                       url(r'^', include(router.urls)),
+                       url(r'^api-token-auth/',
+                           'rest_framework.authtoken.views.obtain_auth_token')
 
-    # url(r'^$', 'userService.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
+                       # url(r'^$', 'userService.views.home', name='home'),
+                       # url(r'^blog/', include('blog.urls')),
 
-    # url(r'^admin/', include(admin.site.urls)),
-)
+                       # url(r'^admin/', include(admin.site.urls)),
+                       )

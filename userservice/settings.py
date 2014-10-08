@@ -55,8 +55,8 @@ PROJECT_APPS = (
 JENKINS_TASKS = (
     'django_jenkins.tasks.run_pylint',
     'django_jenkins.tasks.with_coverage',
-    #'django_jenkins.tasks.run_sloccount',
-    #'django_jenkins.tasks.run_graphmodels'
+    # 'django_jenkins.tasks.run_sloccount',
+    # 'django_jenkins.tasks.run_graphmodels'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -102,15 +102,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 USER_ROLES = [
-        ('Director', 'Director'), 
-        ('Administrator', 'Administrator'), 
-        ('Developer', 'Developer'), 
-        ('Employee', 'Employee') ]
+    ('Director', 'Director'),
+    ('Administrator', 'Administrator'),
+    ('Developer', 'Developer'),
+    ('Employee', 'Employee')]
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',  
-        'rest_framework.authentication.SessionAuthentication',        
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     )
 }
 
