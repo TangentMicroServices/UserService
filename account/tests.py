@@ -1,10 +1,11 @@
+# pylint: disable=R0904
+
 from django.test import TestCase, Client
 from account.models import Profile
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from rest_framework.authtoken.models import Token
-from account.signals import new_user_created
-from account.models import Profile, Role
+from account.models import Profile
 from account.permissions import IsDirector, IsSelf
 from django.http import HttpRequest
 import json
@@ -43,7 +44,7 @@ class PermissionsTestCase(TestCase):
     from account.permissions import IsDirector
 
     def setUp(self):
-        self.user = User.objects.create(username="joe", password="test")
+        self.user = User.objects.create_user(username="joe", password="test")
 
     def tearDown(self):
 
@@ -112,7 +113,7 @@ class EndpointAuthenticationTestCase(TestCase):
 
     def setUp(self):
         self.c = Client()
-        self.user = User.objects.create(username="joe", password="test")
+        self.user = User.objects.create_user(username="joe", password="test")
 
     def tearDown(self):
 
