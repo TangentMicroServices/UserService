@@ -5,7 +5,6 @@ from account.models import Profile
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from rest_framework.authtoken.models import Token
-from account.models import Profile
 from account.permissions import IsDirector, IsSelf
 from django.http import HttpRequest
 import json
@@ -40,8 +39,6 @@ class TokenAuthTestCase(TestCase):
 
 
 class PermissionsTestCase(TestCase):
-
-    from account.permissions import IsDirector
 
     def setUp(self):
         self.user = User.objects.create_user(username="joe", password="test")

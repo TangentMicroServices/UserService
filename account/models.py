@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-import uuid
 from django.conf import settings
 
 
@@ -11,12 +10,14 @@ class Role(models.Model):
 
     user = models.ManyToManyField(User, related_name='roles')
     role_name = models.CharField(
-        max_length=20, help_text='Describes a role that this user has', choices=settings.USER_ROLES)
+        max_length=20, help_text='Describes a role that this user has',
+        choices=settings.USER_ROLES)
 
 
 class Profile(models.Model):
 
     """
+    Additional data about a user
     """
 
     user = models.OneToOneField(User)
