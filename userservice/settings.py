@@ -103,6 +103,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 USER_ROLES = [
     ('Director', 'Director'),
     ('Administrator', 'Administrator'),
