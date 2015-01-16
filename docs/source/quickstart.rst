@@ -63,3 +63,11 @@ To identify yourself in consequent requests, set the `Authorization` header like
 		"authentications": [], 
 		"roles": []
 	}
+
+**Possible Responses**:
+
+* 200 OK
+* 401 Authorization failed:
+   * Invalid Token
+   * Authentication credentials were not provided.
+
