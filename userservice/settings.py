@@ -50,7 +50,7 @@ INSTALLED_APPS = (
 )
 
 PROJECT_APPS = (
-    'account',
+    'api',
 )
 
 JENKINS_TASKS = (
