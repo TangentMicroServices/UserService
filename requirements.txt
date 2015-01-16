@@ -11,6 +11,8 @@ django-user-roles
 django-jenkins
 django-extensions
 
+pylint
+coverage
 sphinx
 sphinx_rtd_theme
 django-cors-headers
