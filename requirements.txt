@@ -13,3 +13,4 @@ django-extensions
 
 sphinx
 sphinx_rtd_theme
+django-cors-headers

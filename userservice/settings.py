@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     # testing etc:
     'django_jenkins',
     'django_extensions',
+    'corsheaders',
 )
 
 PROJECT_APPS = (
