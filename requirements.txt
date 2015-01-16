@@ -4,7 +4,7 @@ slumber
 requests
 responses
 mock
-djangorestframework
+djangorestframework==2.4.2
 django-rest-swagger
 django-filter
 django-user-roles

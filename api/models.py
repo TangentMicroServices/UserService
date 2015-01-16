@@ -42,4 +42,4 @@ class AppAuthorization(models.Model):
     token = models.CharField(
         max_length=200, blank=True, null=True, help_text='Optional, this is your token or secret')
 
-from account.signals import new_user_created
+from signals import new_user_created
