@@ -4,7 +4,9 @@
 # User Service
 
 
-User management service authenticates users for all the other micro services projects.
+User management service authenticates users for all the other micro services projects. 
+
+The documentation is hosted at [http://userservice.readthedocs.org/en/latest/]()
 
 ## Setting Up
 
@@ -24,3 +26,13 @@ User management service authenticates users for all the other micro services pro
 1. Run the tests to ensure the project is up and running correctly
 
 		python manage.py test
+		
+## Build the Docs
+
+    cd docs     
+    make html
+
+## Auto Build the Docs as you Edit
+
+	cd docs
+	sphinx-autobuild source build/html -p3000

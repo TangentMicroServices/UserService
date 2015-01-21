@@ -28,6 +28,61 @@ Getting an auth token
 
 You can use this token to make future authorized requests
 
+**Angular**
+
+Add constant to settings file::
+
+	.constant("SERVICE_BASE_URI", "http://domain1:8000/")
+
+Add login to ng-service::
+
+	apiService.login = function (username, password) {
+		var deferred = $q.defer();
+		var url = SERVICE_BASE_URI + "/api-token-auth/";
+
+		$http.post(url, {
+			username: username, password: password
+		}).success(function (response, status, headers, config) {
+			if (response.token) {
+				apiService.getCustomers(response.token);
+				$http.defaults.headers['Authorization'] = 'JWT ' + response.token;
+			}
+
+			deferred.resolve(response, status, headers, config);
+		}).error(function (response, status, headers, config) {
+			deferred.reject(response, status, headers, config);
+		});
+
+		return true; //deferred.promise;
+	};
+
+Add getCustomers to ng-service::
+
+	apiService.getCustomers = function (token) {
+
+	var deferred = $q.defer();
+	var url = SERVICE_BASE_URI + "/api/timesheet/customer/";
+
+	$http.get(url, {
+			headers: {'Authorization': 'JWT ' + token}
+		}).success(function (response, status, headers, config) {
+		if (response) {
+			//view the awesome response from service :)
+		}
+
+		deferred.resolve(response, status, headers, config);
+		}).error(function (response, status, headers, config) {
+			deferred.reject(response, status, headers, config);
+		});
+
+		return true; //deferred.promise;
+	};
+
+Call the ng-service from controller::
+
+	ApiService.login($scope.username, $scope.password);
+
+
 Authorizing with an auth token
 -------------------------------
 
