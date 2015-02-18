@@ -22,6 +22,10 @@ The documentation is hosted at [http://userservice.readthedocs.org/en/latest/]()
 1. Install the database
 
 		python manage.py syncdb
+		
+1. Run the initial data (if required - this is test data only)
+
+		python manage.py loaddata data/initial.json
 
 1. Run the tests to ensure the project is up and running correctly
 
