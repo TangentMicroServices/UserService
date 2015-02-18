@@ -12,7 +12,7 @@ Getting an auth token
 
 **Curl**::
 
-    curl -X POST http://staging.userservice.tangentme.com/api-token-auth/ --data "username=joe&password=test"
+    curl -X POST http://staging.userservice.tangentme.com/api-token-auth/ --data "username=admin&password=test"
 
 **Python**::
 
@@ -32,7 +32,7 @@ You can use this token to make future authorized requests
 
 Add constant to settings file::
 
-	.constant("SERVICE_BASE_URI", "http://domain1:8000/")
+	.constant("SERVICE_BASE_URI", "http://staging.userservice.tangentme.com")
 
 Add login to ng-service::
 
@@ -44,8 +44,7 @@ Add login to ng-service::
 			username: username, password: password
 		}).success(function (response, status, headers, config) {
 			if (response.token) {
-				apiService.getCustomers(response.token);
-				$http.defaults.headers['Authorization'] = 'JWT ' + response.token;
+				//Store the token for further calls
 			}
 
 			deferred.resolve(response, status, headers, config);
@@ -55,33 +54,6 @@ Add login to ng-service::
 
 		return true; //deferred.promise;
 	};
-
-Add getCustomers to ng-service::
-
-	apiService.getCustomers = function (token) {
-
-	var deferred = $q.defer();
-	var url = SERVICE_BASE_URI + "/api/timesheet/customer/";
-
-	$http.get(url, {
-			headers: {'Authorization': 'JWT ' + token}
-		}).success(function (response, status, headers, config) {
-		if (response) {
-			//view the awesome response from service :)
-		}
-
-		deferred.resolve(response, status, headers, config);
-		}).error(function (response, status, headers, config) {
-			deferred.reject(response, status, headers, config);
-		});
-
-		return true; //deferred.promise;
-	};
-
-Call the ng-service from controller::
-
-	ApiService.login($scope.username, $scope.password);
-
 
 Authorizing with an auth token
 -------------------------------
@@ -118,6 +90,28 @@ To identify yourself in consequent requests, set the `Authorization` header like
 		"authentications": [], 
 		"roles": []
 	}
+
+**Angular**::
+
+	apiService.getMe = function (token) {
+
+		var deferred = $q.defer();
+		var url = SERVICE_BASE_URI + "/users/me/";
+
+		$http.get(url, {
+			headers: {'Authorization': 'Token ' + token}
+		}).success(function (response, status, headers, config) {
+		if (response) {
+			//Handle the response
+		}
+
+		deferred.resolve(response, status, headers, config);
+		}).error(function (response, status, headers, config) {
+			deferred.reject(response, status, headers, config);
+		});
+
+		return true; //deferred.promise;
+	};
 
 **Possible Responses**:
 
