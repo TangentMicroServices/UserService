@@ -12,7 +12,7 @@ Getting an auth token
 
 **Curl**::
 
-    curl -X POST http://staging.userservice.tangentme.com/api-token-auth/ --data "username=joe&password=test"
+    curl -X POST http://staging.userservice.tangentme.com/api-token-auth/ --data "username=admin&password=test"
 
 **Python**::
 
@@ -27,6 +27,33 @@ Getting an auth token
 	{"token": "11ce1e89d7e1d23e78e5c922c0cbd24bb2457cec"}
 
 You can use this token to make future authorized requests
+
+**Angular**
+
+Add constant to settings file::
+
+	.constant("SERVICE_BASE_URI", "http://staging.userservice.tangentme.com")
+
+Add login to ng-service::
+
+	apiService.login = function (username, password) {
+		var deferred = $q.defer();
+		var url = SERVICE_BASE_URI + "/api-token-auth/";
+
+		$http.post(url, {
+			username: username, password: password
+		}).success(function (response, status, headers, config) {
+			if (response.token) {
+				//Store the token for further calls
+			}
+
+			deferred.resolve(response, status, headers, config);
+		}).error(function (response, status, headers, config) {
+			deferred.reject(response, status, headers, config);
+		});
+
+		return true; //deferred.promise;
+	};
 
 Authorizing with an auth token
 -------------------------------
@@ -63,6 +90,28 @@ To identify yourself in consequent requests, set the `Authorization` header like
 		"authentications": [], 
 		"roles": []
 	}
+
+**Angular**::
+
+	apiService.getMe = function (token) {
+
+		var deferred = $q.defer();
+		var url = SERVICE_BASE_URI + "/users/me/";
+
+		$http.get(url, {
+			headers: {'Authorization': 'Token ' + token}
+		}).success(function (response, status, headers, config) {
+		if (response) {
+			//Handle the response
+		}
+
+		deferred.resolve(response, status, headers, config);
+		}).error(function (response, status, headers, config) {
+			deferred.reject(response, status, headers, config);
+		});
+
+		return true; //deferred.promise;
+	};
 
 **Possible Responses**:
 
