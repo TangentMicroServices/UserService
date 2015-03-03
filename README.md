@@ -6,7 +6,6 @@
 
 User management service authenticates users for all the other micro services projects. 
 
-The documentation is hosted at [http://userservice.readthedocs.org/en/latest/]()
 
 ## Setting Up
 

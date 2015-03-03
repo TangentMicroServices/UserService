@@ -122,4 +122,4 @@ REST_FRAMEWORK = {
     )
 }
 
-STATIC_ROOT = '/srv/www/userservice/static/'
+STATIC_ROOT = '/srv/userservice/static/'
