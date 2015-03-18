@@ -7,6 +7,8 @@ urlpatterns = patterns('',
 	url(r'^api-token-auth/',
 	   'rest_framework.authtoken.views.obtain_auth_token'),
 
+	url(r'^api-explorer/', include('rest_framework_swagger.urls')),
+
 	# url(r'^$', 'userService.views.home', name='home'),
 	# url(r'^blog/', include('blog.urls')),
 
