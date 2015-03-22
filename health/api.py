@@ -10,7 +10,8 @@ def health(request):
 
 	json = {
 		'version': settings.VERSION,
-		'name': "UserService"
+		'name': "UserService",
+		'explorer_url': "/api-explorer/"
 	}
 	
 	return Response(json)

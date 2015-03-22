@@ -17,5 +17,5 @@ class HealthTestCase(TestCase):
 
 	def test_health_returns_useful_information(self):
 
-		response = self.client.get('/health/')
-		self.assertEqual(response.data, {"name": "UserService", "explorer_url": "/api-explorer/","version": settings.VERSION})
+		response = self.client.get('/')
+		self.assertEqual(response.data, {"version": settings.VERSION, "name": "UserService", "explorer_url": "/api-explorer/"})
