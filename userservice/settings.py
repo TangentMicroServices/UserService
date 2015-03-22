@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'rest_framework.authtoken',
     'rest_framework_swagger',
     'api',
+    'health',
 
     # testing etc:
     'django_jenkins',
@@ -123,3 +124,5 @@ REST_FRAMEWORK = {
 }
 
 STATIC_ROOT = '/srv/userservice/static/'
+
+VERSION = "1"
