@@ -6,6 +6,7 @@
 
 User management service authenticates users for all the other micro services projects. 
 
+[Documentation] (http://userservice.readthedocs.org/en/latest/)
 
 ## Setting Up
 
