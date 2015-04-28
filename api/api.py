@@ -6,7 +6,6 @@ from permissions import IsSelfOrDirector
 from models import Profile, AppAuthorization, Role
 from rest_framework.decorators import list_route, detail_route
 import json
-from datetime import datetime
 from rest_framework.permissions import IsAuthenticated
 
 class ProfileSerializer(serializers.ModelSerializer):

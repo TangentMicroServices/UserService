@@ -127,9 +127,9 @@ SWAGGER_SETTINGS = {
     'api_key': 'fb5df470df0fa3727c49a61608996618d0954289',
     'info': {
         'contact': 'admin@tangentsolutions.co.za',
-        'description': 'A microservice for handling project status and information. From scaffolding 3rd party tools etc to managing resourcing and project tracking',                       
+        'description': 'A microservice for handling user status and information.',                       
         'license': 'MIT',
-        'title': 'ProjectService',
+        'title': 'UserService',
     },
 
 }
