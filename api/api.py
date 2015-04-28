@@ -6,7 +6,8 @@ from permissions import IsSelfOrDirector
 from models import Profile, AppAuthorization, Role
 from rest_framework.decorators import list_route, detail_route
 import json
-
+from datetime import datetime
+from rest_framework.permissions import IsAuthenticated
 
 class ProfileSerializer(serializers.ModelSerializer):
 
@@ -41,7 +42,8 @@ class UserSerializer(serializers.ModelSerializer):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (IsSelfOrDirector,)
+    #permission_classes = (IsSelfOrDirector,)
+    permission_classes = (IsAuthenticated,)
 
     @list_route(methods=['get', 'post'])
     def me(self, request):
@@ -54,17 +56,17 @@ class UserViewSet(viewsets.ModelViewSet):
 
         return HttpResponse(response, content_type="application/json")
 
-    @detail_route(methods=['post'])
-    def grant(self, request):
+    #@detail_route(methods=['post'])
+    #def grant(self, request):
 
-        user_id = request.POST.get("id")
-        role = request.POST.get("role")
+    #    user_id = request.POST.get("id")
+    #    role = request.POST.get("role")
 
-    @detail_route(methods=['post'])
-    def revoke(self, request):
+    #@detail_route(methods=['post'])
+    #def revoke(self, request):
 
-        user_id = request.POST.get("id")
-        role = request.POST.get("role")
+     #   user_id = request.POST.get("id")
+     #   role = request.POST.get("role")
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
