@@ -124,7 +124,7 @@ REST_FRAMEWORK = {
 }
 
 SWAGGER_SETTINGS = {
-    'api_key': 'fb5df470df0fa3727c49a61608996618d0954289',
+    #'api_key': 'fb5df470df0fa3727c49a61608996618d0954289',
     'info': {
         'contact': 'admin@tangentsolutions.co.za',
         'description': 'A microservice for handling user status and information.',                       

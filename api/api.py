@@ -8,6 +8,7 @@ from rest_framework.decorators import list_route, detail_route
 import json
 from rest_framework.permissions import IsAuthenticated
 
+
 class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -54,18 +55,6 @@ class UserViewSet(viewsets.ModelViewSet):
         response = json.dumps(serializer.data)
 
         return HttpResponse(response, content_type="application/json")
-
-    #@detail_route(methods=['post'])
-    #def grant(self, request):
-
-    #    user_id = request.POST.get("id")
-    #    role = request.POST.get("role")
-
-    #@detail_route(methods=['post'])
-    #def revoke(self, request):
-
-     #   user_id = request.POST.get("id")
-     #   role = request.POST.get("role")
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
