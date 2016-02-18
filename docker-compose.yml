@@ -1,0 +1,19 @@
+db:
+  image: postgres
+web:
+  build: .
+  command: gunicorn userservice.wsgi:application -b :8000 --reload
+  volumes:
+    - .:/code
+  ports:
+    - "8000:8000"
+  links:
+    - db
+ci:
+  build: . 
+  dockerfile: CI.Dockerfile 
+  #command: ansible-playbook ansibles/bootstrap.yml
+  volumes:
+    - .:/code
+  links:
+    - db

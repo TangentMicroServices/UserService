@@ -1,13 +1,3 @@
-"""
-Django settings for userService project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
-"""
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -36,11 +26,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # 3rd party
     'rest_framework',
     'rest_framework.authtoken',
     'rest_framework_swagger',
+
+    # custom:
     'api',
     'health',
 
@@ -102,8 +95,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = '/srv/static/userservice/static/'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -124,7 +115,6 @@ REST_FRAMEWORK = {
 }
 
 SWAGGER_SETTINGS = {
-    #'api_key': 'fb5df470df0fa3727c49a61608996618d0954289',
     'info': {
         'contact': 'admin@tangentsolutions.co.za',
         'description': 'A microservice for handling user status and information.',                       
@@ -133,6 +123,23 @@ SWAGGER_SETTINGS = {
     },
 
 }
-
+# -- custom settings --
 VERSION = "1"
-STATIC_ROOT = '/srv/static/userservice/static/'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = '/code/static/'
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+NOSE_ARGS = ['--with-spec', '--spec-color',
+             '--with-coverage', '--cover-html',
+             '--cover-package=.', '--cover-html-dir=reports/cover']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'db',
+        'PORT': 5432,
+    }
+}

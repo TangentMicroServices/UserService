@@ -1,16 +1,20 @@
-django==1.7
+django==1.8
+psycopg2
 gunicorn
 slumber
 requests
 responses
 mock
-djangorestframework==2.4.2
+djangorestframework==3.3
 django-rest-swagger
 django-filter
 django-user-roles
 django-jenkins
 django-extensions
 
+pinocchio
+nose 
+django_nose
 pylint
 coverage
 sphinx

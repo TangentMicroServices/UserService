@@ -16,6 +16,7 @@ class Pep8TestCase(TestCase):
         """
         Ensure that code is pep8 compliant
         """
+        pass
         #from subprocess import call
         # py.test --pep8
         # see pytest.ini for config options
@@ -26,8 +27,12 @@ class Pep8TestCase(TestCase):
 class TokenAuthTestCase(TestCase):
 
     def setUp(self):
+        for user in User.objects.all(): user.delete()
         self.user = User.objects.create_user(username="joe", password="test")
         self.c = Client()
+
+    def tearDown(self):
+        for user in User.objects.all(): user.delete()
 
     def test_get_token(self):
 
@@ -37,6 +42,8 @@ class TokenAuthTestCase(TestCase):
         assert 200 == response.status_code, "Response is 200 OK"
         assert json.loads(response.content).get("token", False) is not False, "Token is set"
 
+    
+
 
 class PermissionsTestCase(TestCase):
 
@@ -45,6 +52,8 @@ class PermissionsTestCase(TestCase):
 
     def tearDown(self):
 
+        for user in User.objects.all():
+            user.delete()
         for role in self.user.roles.all():
             role.delete()
 
@@ -96,6 +105,11 @@ class PermissionsTestCase(TestCase):
 
 class ModelsTestCase(TestCase):
 
+    def tearDown(self):
+
+        for user in User.objects.all():
+            user.delete()
+
     def test_new_user_signals(self):
 
         user = User.objects.create_user(username="joe", password="test")
@@ -113,6 +127,9 @@ class EndpointAuthenticationTestCase(TestCase):
         self.user = User.objects.create_user(username="joe", password="test")
 
     def tearDown(self):
+
+        for user in User.objects.all():
+            user.delete()
 
         for role in self.user.roles.all():
             role.delete()
@@ -145,6 +162,11 @@ class EndpointsTestCase(TestCase):
 
     def setUp(self):
         self.c = Client()
+
+    def tearDown(self):
+
+        for user in User.objects.all():
+            user.delete()
 
     def test_enrol_employee(self):
         """
