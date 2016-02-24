@@ -12,14 +12,12 @@ SECRET_KEY = 'dgc59t9rf8l(on@zhefue&ck(cq^uo%&l+cig=wo!23bk-bydo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.consul']
 
 
 # Application definition
 
-INSTALLED_APPS = (
+INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -27,22 +25,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-
-    # 3rd party
-    'rest_framework',
-    'rest_framework.authtoken',
-    'rest_framework_swagger',
-
-    # custom:
-    'api',
-    'health',
-
-    # testing etc:
-    'django_jenkins',
-    'django_extensions',
-    'corsheaders',
-)
+]
 
 PROJECT_APPS = (
     'api',
@@ -61,9 +44,28 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',    
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 ROOT_URLCONF = 'userservice.urls'
 WSGI_APPLICATION = 'userservice.wsgi.application'
@@ -92,55 +94,15 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
-
-
-CORS_ORIGIN_ALLOW_ALL = True
-
-USER_ROLES = [
-    ('Director', 'Director'),
-    ('Administrator', 'Administrator'),
-    ('Developer', 'Developer'),
-    ('Employee', 'Employee')]
-
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication'
-    )
-}
-
-SWAGGER_SETTINGS = {
-    'info': {
-        'contact': 'admin@tangentsolutions.co.za',
-        'description': 'A microservice for handling user status and information.',                       
-        'license': 'MIT',
-        'title': 'UserService',
-    },
-
-}
-# -- custom settings --
-VERSION = "1"
-
 STATIC_URL = '/static/'
+
 STATIC_ROOT = '/code/static/'
 
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-NOSE_ARGS = ['--with-spec', '--spec-color',
-             '--with-coverage', '--cover-html',
-             '--cover-package=.', '--cover-html-dir=reports/cover']
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'HOST': 'db',
-        'PORT': 5432,
-    }
-}
+
+if os.environ.get("WITH_DOCKER", False):
+    from userservice.docker_settings import *

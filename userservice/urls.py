@@ -8,11 +8,11 @@ from django.conf.urls.static import static
 
 
 urlpatterns = patterns('',
-	url(r'^api/v1/', include(router.urls)),
+	url(r'^', include(router.urls)),
 	url(r'^api-token-auth/','rest_framework.authtoken.views.obtain_auth_token'),
-	url(r'^api-explorer/', include('rest_framework_swagger.urls')),
+	url(r'^explorer/', include('rest_framework_swagger.urls')),
 	url(r'^admin/', include(admin.site.urls)),
-	url(r'^', api.health),
+	url(r'^health/', api.health),
 )
 
 if settings.DEBUG is True:

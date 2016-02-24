@@ -9,8 +9,7 @@ from rest_framework.authtoken.models import Token
 def new_user_created(sender, instance, **kwargs):
 
     if kwargs.get("created", False):
-        Token.objects.create(user=instance)
+        token = Token.objects.create(user=instance)
         Profile.objects.create(user=instance)
 
-    # create a blank profile
-    # create a token
+    

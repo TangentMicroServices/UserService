@@ -43,8 +43,9 @@ class AppAuthorization(models.Model):
         max_length=200, blank=True, null=True, help_text='Optional, this is your token or secret')
 
 
-## monkey patching:
+## monkey patching User:
 def add_role(self, role_name):
+    """user.add_role()"""
 
     if self.is_authenticated():
         role, created = Role.objects.get_or_create(
@@ -53,6 +54,7 @@ def add_role(self, role_name):
 
 
 def has_role(self, role_name):
+    """user.has_role()"""
 
     if self.is_authenticated():
 
@@ -62,15 +64,14 @@ def has_role(self, role_name):
 
 
 def get_token(self):
-
+    """user.get_token()"""
+    
     if self.is_authenticated():
         return Token.objects.get(user=self).key
     return None
 
-
 User.add_to_class("add_role", add_role)
 User.add_to_class("has_role", has_role)
 User.add_to_class("get_token", get_token)
-
 
 from signals import new_user_created

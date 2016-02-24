@@ -8,6 +8,7 @@ from rest_framework.authtoken.models import Token
 from permissions import IsDirector, IsSelf
 from django.http import HttpRequest
 import json
+import unittest
 
 
 class Pep8TestCase(TestCase):
@@ -138,25 +139,29 @@ class EndpointAuthenticationTestCase(TestCase):
         url = reverse('user-me')
         response = self.c.get(url)
 
-        assert response.status_code == 401, "401: Authentication required"
+        assert response.status_code == 401, \
+            "Expect 401 Authentication required. Got: {}" . format (response.status_code)
 
+    @unittest.skip("This doesnt really make sense?")
     def test_director_can_see_anyone(self):
+        '''test_director_can_see_anyone: This doesn't make sense? /me should always return the logged in user'''
         url = reverse('user-me')
         self.user.add_role('Director')
 
-        response = self.c.get(
-            url, HTTP_AUTHORIZATION="Token {0}" . format(self.user.get_token()))
+        response = self.c.get(url, HTTP_AUTHORIZATION="Token {0}" \
+                        . format(self.user.get_token()))
 
-        assert response.status_code == 200, "Director can view any user"
+        assert response.status_code == 200, \
+            "Expect Director can view any user. Expected 200. Got: {}" . format (response.status_code)
 
     def test_user_can_see_self(self):
         url = reverse('user-me')
 
-        response = self.c.get(
-            url, HTTP_AUTHORIZATION="Token {0}" . format(self.user.get_token()))
+        token_header = "Token {0}" . format(self.user.get_token())
+        response = self.c.get(url, HTTP_AUTHORIZATION=token_header)
 
-        assert response.status_code == 200, "User can see self"
-
+        assert response.status_code == 200, \
+            "User can see self. Expected 200. Got: {}" . format (response.status_code)
 
 class EndpointsTestCase(TestCase):
 

@@ -1,0 +1,24 @@
+project_name: userservice
+git_repo: UserService 
+git_organization: TangentMicroServices
+git_branch: version2
+
+app_health_path: '/health/'
+pre_service_up_commands: []
+post_service_up_commands: 
+  - mkdir -p /code/static/
+  - python manage.py collectstatic --no-input
+  - python manage.py migrate
+  - python manage.py loaddata data/initial.json
+  - python manage.py init_staging
+
+# service optionals:
+with_kong: yes
+with_dns: no
+with_nginx: no
+
+
+# will map a static location to a path.
+nginx_proxy_static_sites: 
+  - location: /static/
+    path: /code/{{git_repo}}-{{git_branch}}/static/
