@@ -1,19 +1,13 @@
 db:
+  restart: on-failure:10
   image: postgres
 web:
+  restart: on-failure:10
   build: .
   command: gunicorn userservice.wsgi:application -b :8000 --reload
   volumes:
     - .:/code
   ports:
-    - "8000:8000"
-  links:
-    - db
-ci:
-  build: . 
-  dockerfile: CI.Dockerfile 
-  #command: ansible-playbook ansibles/bootstrap.yml
-  volumes:
-    - .:/code
+    - "${APP_PORT}:8000"
   links:
     - db
