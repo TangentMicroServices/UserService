@@ -1,13 +1,21 @@
-db:
-  restart: on-failure:10
-  image: postgres
-web:
-  restart: on-failure:10
-  build: .
-  command: gunicorn userservice.wsgi:application -b :8000 --reload
-  volumes:
-    - .:/code
-  ports:
-    - "${APP_PORT}:8000"
-  links:
-    - db
+version: "2"
+
+services:
+  db:
+    restart: on-failure:10
+    image: postgres:9.4
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+  web:
+    restart: on-failure:10
+    build: .
+    command: gunicorn userservice.wsgi:application -b :8000 --reload
+    volumes:
+      - .:/code
+    ports:
+      - "${APP_PORT}:8000"
+    links:
+      - db
+
+volumes:
+  db-data:
