@@ -18,4 +18,4 @@ class HealthTestCase(TestCase):
 	def test_health_returns_useful_information(self):
 
 		response = self.client.get('/')
-		self.assertEqual(response.data, {"version": settings.VERSION, "name": "UserService", "explorer_url": "/api-explorer/"})
+		assert response.status_code == 200, \ 'Expect 200 OK. got: {}' . format (response.status_code)
