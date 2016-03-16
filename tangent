@@ -2,21 +2,26 @@ project_name: userservice
 git_repo: UserService 
 git_organization: TangentMicroServices
 git_branch: version2
+visibility: internal # one of: [internal, public, public_protected]
 
 app_health_path: '/health/'
+
+with_hipchat: yes
+hipchat_room: "MicroServices"
+
+build_commands: []
+test_commands: 
+  - python manage.py test
+analyze_commands: [] # collectstatic will go here
 pre_service_up_commands: []
 post_service_up_commands: 
   - mkdir -p /code/static/
-  - python manage.py collectstatic --no-input
   - python manage.py migrate
-  - python manage.py loaddata data/initial.json
-  - python manage.py init_staging
 
 # service optionals:
 with_kong: yes
 with_dns: no
 with_nginx: no
-
 
 # will map a static location to a path.
 nginx_proxy_static_sites: 
