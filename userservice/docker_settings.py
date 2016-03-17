@@ -72,6 +72,8 @@ VERSION = 1
 
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-NOSE_ARGS = ['--with-spec', '--spec-color', '-s',
-             '--with-coverage', '--cover-html', '--cover-erase',
+
+#'--spec-color', '-s', # specify these on the command line (they'll mess with build server's tess)
+NOSE_ARGS = ['--with-spec', 
+             '--with-coverage', '--cover-html', '--cover-erase', '--with-xunit', '--cover-xml',
              '--cover-package=.', '--cover-html-dir=reports/cover']
