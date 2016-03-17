@@ -23,6 +23,7 @@ with_kong: yes
 with_dns: no
 with_nginx: no
 
+
 # will map a static location to a path.
 nginx_proxy_static_sites: 
   - location: /static/
