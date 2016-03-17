@@ -1,7 +1,7 @@
 project_name: userservice
 git_repo: UserService 
 git_organization: TangentMicroServices
-git_branch: version2
+git_branch: test_branch
 visibility: internal 
 
 app_health_path: '/health/'
