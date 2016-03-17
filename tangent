@@ -27,4 +27,3 @@ with_nginx: no
 nginx_proxy_static_sites: 
   - location: /static/
     path: /code/{{git_repo}}-{{git_branch}}/static/
-
