@@ -1,0 +1,18 @@
+---
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - python
+  fixme:
+    enabled: true
+  radon:
+    enabled: true
+ratings:
+  paths:
+  - "api/**/*.py"
+exclude_paths: 
+  - api/tests.py
+  - health/tests.py
+  - userservice/*
