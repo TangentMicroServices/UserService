@@ -103,6 +103,4 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-
-if os.environ.get("WITH_DOCKER", False):
-    from userservice.docker_settings import *
+from userservice.docker_settings import *
