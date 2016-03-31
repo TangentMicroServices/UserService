@@ -21,6 +21,8 @@ post_service_up_commands:
 consul_tags: 
   - api_service
   - django_rest_framework
+
+with_kong: yes
 kong_simple_plugins:
   - cors 
   - key-auth
