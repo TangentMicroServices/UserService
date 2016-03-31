@@ -12,18 +12,21 @@ hipchat_room: "MicroServices"
 build_commands: []
 test_commands: 
   - python manage.py test
-analyze_commands: [] # collectstatic will go here
 pre_service_up_commands: []
 post_service_up_commands: 
   - mkdir -p /code/static/
   - python manage.py migrate
 
 # service optionals:
-with_kong: yes
-with_dns: no
-with_nginx: no
+consul_tags: 
+  - api_service
+  - django_rest_framework
+kong_simple_plugins:
+  - cors 
+  - key-auth
 
-# will map a static location to a path.
-nginx_proxy_static_sites: 
-  - location: /static/
-    path: /code/{{git_repo}}-{{git_branch}}/static/
+kong_configurable_plugins:
+  - name: http-log
+    config: 
+      http_endpoint: "http://logstash.service.consul:8021/{{project_subdomain}}"
+
