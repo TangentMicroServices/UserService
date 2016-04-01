@@ -16,3 +16,5 @@ exclude_paths:
   - api/tests.py
   - health/tests.py
   - userservice/*
+  - reports/*
+  - codeclimate.json
