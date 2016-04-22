@@ -72,15 +72,15 @@ class Command(BaseCommand):
                         "due_date" : row[8].split(" ")[0],
                         "estimated_hours" : row[5].replace(",","") + ".00",
                     }
-                    print data
+                    print (data)
                     response = requests.post(url, data=json.dumps(data), headers=self.headers)
                     if response.status_code == 201:
-                        print "SUCCCESS: {0}" . format (row[0])
+                        print ("SUCCCESS: {0}" . format (row[0]))
                     else:
-                        print "{0}: {1}" . format (response.status_code, response.content)
+                        print ("{0}: {1}" . format (response.status_code, response.content))
                     
                 else:
-                    print "No project found for {0}. Ignoring task: {1}" . format (row[1], row[0])
+                    print ("No project found for {0}. Ignoring task: {1}" . format (row[1], row[0]))
 
         
     def load_projects(self):
@@ -103,7 +103,7 @@ class Command(BaseCommand):
                 }
                 
                 response = requests.post(url, data=json.dumps(data), headers=self.headers)
-                print "."
+                print (".")
 
 
     def load_users(self):
@@ -130,7 +130,7 @@ class Command(BaseCommand):
                 }
                 response = requests.post(url, data=json.dumps(data), headers=self.headers)
 
-                print "."
+                print (".")
                 
 
 
